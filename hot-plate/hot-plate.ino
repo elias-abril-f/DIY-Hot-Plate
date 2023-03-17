@@ -67,9 +67,7 @@ void setup() {
   display.display(); 
    //Define the pins as outputs or inputs
   pinMode(SSR, OUTPUT);
-  digitalWrite(SSR, HIGH);        //Make sure we start with the SSR OFF (is off with HIGH)
-  pinMode(buzzer, OUTPUT); 
-  digitalWrite(buzzer, LOW);  
+  digitalWrite(SSR, LOW);        //Make sure we start with the SSR OFF (is off with HIGH)
   pinMode(but_1, INPUT_PULLUP);
   pinMode(but_2, INPUT_PULLUP);
   pinMode(but_3, INPUT_PULLUP);
@@ -121,7 +119,7 @@ void loop() {
       PREV_ERROR = PID_ERROR;
       
       if(seconds > 130){
-        digitalWrite(SSR, HIGH);            //With HIGH the SSR is OFF
+        digitalWrite(SSR, LOW);            //With HIGH the SSR is OFF
         temp_setpoint = 0;
         running_mode = 10;                  //Cooldown mode        
       }     
@@ -150,7 +148,7 @@ void loop() {
 
     //Mode 0 is with SSR OFF (we can selcet mode with buttons)
     if(running_mode == 0){ 
-      digitalWrite(SSR, HIGH);        //With HIGH the SSR is OFF
+      digitalWrite(SSR, LOW);        //With HIGH the SSR is OFF
       display.clearDisplay();
       display.setCursor(0,0);     
       display.print("T: ");
@@ -185,7 +183,7 @@ void loop() {
       if(temperature < cooldown_temp){
         running_mode = 0;  
       }
-      digitalWrite(SSR, HIGH);        //With HIGH the SSR is OFF 
+      digitalWrite(SSR, LOW);        //With HIGH the SSR is OFF 
       display.clearDisplay();
       display.setCursor(0,0);     
       display.print("T: ");
@@ -241,7 +239,7 @@ void loop() {
   ///////////////////////////////////////////////////////////////////
   if(!digitalRead(but_4) && but_4_state){
     if(running_mode == 1){
-      digitalWrite(SSR, HIGH);        //With HIGH the SSR is OFF
+      digitalWrite(SSR, LOW);        //With HIGH the SSR is OFF
       running_mode = 0;
       selected_mode = 0; 
     }
